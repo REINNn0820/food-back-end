@@ -1,6 +1,7 @@
 import { configDotenv } from "dotenv";
 import express, { Request, Response } from "express";
 import { mongo } from "mongoose";
+import { foodCategoryRouter } from "./router/food-category";
 const cors = require("cors");
 const mongoose = require("mongoose");
 
@@ -24,50 +25,11 @@ const connectMongoDb = async () => {
 
 connectMongoDb();
 
-const FOOD_CATEGORY_SCHEMA = new mongoose.Schema(
-  {
-    categoryName: String,
-  },
-  { timestamps: true }
-);
 
-const FoodCategoryModel = mongoose.model(
-  "Food-category",
-  FOOD_CATEGORY_SCHEMA,
-  "food-category"
-);
 
-app.get("/food-category", async (req: Request, res: Response) => {
-  const foodCategories = await FoodCategoryModel.find();
-  res.json(foodCategories);
-});
-app.post("/food-category", async (req: Request, res: Response) => {
-  const newItem = await FoodCategoryModel.create({
-    categoryName: req.body.categoryName,
-  });
-  res.send({
-    message: "New category created",
-    newItem,
-  });
-});
 
-app.delete("/food-category", async (req: Request, res: Response) => {
-  const categoryJson = await FoodCategoryModel.findByIdAndDelete(
-    "6784c2fea812ef1ac597b055"
-  );
-  res.send("Ene ustgagdsan shit");
-  res.json(categoryJson);
-});
 
-app.put("/food-category/:id", async (req: Request, res: Response) => {
-  const updateId = req.params.id.trim();
-  const updated = await FoodCategoryModel.findByIdAndUpdate(
-    updateId,
-    { categoryName: req.body.categoryName },
-    { new: true }
-  );
-  res.json(updated);
-});
+app.use("/food-category",foodCategoryRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
