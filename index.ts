@@ -6,7 +6,7 @@ import { foodRouter } from "./router/food";
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const PORT = 5000;
+const PORT = 5001;
 const app = express();
 
 app.use(cors());
