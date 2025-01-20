@@ -17,11 +17,10 @@ foodCategoryRouter.post("/", async (req: Request, res: Response) => {
   });
 });
 
-foodCategoryRouter.delete("/", async (req: Request, res: Response) => {
-  const deleteId = req.params.id;
+foodCategoryRouter.delete("/:id", async (req: Request, res: Response) => {
+  const deleteId = req.params.id.trim();
   const categoryJson = await FoodCategoryModel.findByIdAndDelete(deleteId);
   res.send("Ene ustgagdsan shit");
-  res.json(categoryJson);
 });
 
 foodCategoryRouter.put("/:id", async (req: Request, res: Response) => {
