@@ -8,7 +8,7 @@ const FOOD_SCHEMA = new Schema(
     image: String,
     category: {
       type: Schema.Types.ObjectId,
-      ref: "FoodCategory",
+      ref: "food-category",
     },
   },
   {
@@ -16,6 +16,6 @@ const FOOD_SCHEMA = new Schema(
   }
 );
 
-const FoodModel = model("food", FOOD_SCHEMA, "food");
+const FoodModel = model("Food", FOOD_SCHEMA, "food");
 
 export { FoodModel };

@@ -3,6 +3,8 @@ import express, { Request, Response } from "express";
 import { mongo } from "mongoose";
 import { foodCategoryRouter } from "./router/food-category";
 import { foodRouter } from "./router/food";
+import { UserRouter } from "./router/user";
+import { FoodOrderRouter } from "./router/food-order";
 const cors = require("cors");
 const mongoose = require("mongoose");
 
@@ -28,6 +30,8 @@ connectMongoDb();
 
 app.use("/food-category", foodCategoryRouter);
 app.use("/food", foodRouter);
+app.use("/food-order", FoodOrderRouter);
+app.use("/user", UserRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
