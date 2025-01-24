@@ -15,11 +15,10 @@ FoodOrderRouter.get("/:id", async (req: Request, res: Response) => {
 });
 
 FoodOrderRouter.post("/", async (req: Request, res: Response) => {
-    const {body} = req
-  await FoodOrderModel.create({ ...body });
-  const foodOrder = await FoodOrderModel.find();
-
-  res.send(foodOrder);
+  const user = req?.userId;
+  const { foodOrderItems, totalPrice } = req.body;
+  const newOrder = await FoodOrderModel.create(order);
+  res.json(newOrder);
 });
 
 FoodOrderRouter.put("/:id", async (req: Request, res: Response) => {
@@ -39,7 +38,9 @@ FoodOrderRouter.delete(
   "/:id",
   async (req: Request<{ id: string }>, res: Response) => {
     const foodOrderId = req.params.id;
-    const deletedFoodOrder = await FoodOrderModel.findByIdAndDelete(foodOrderId);
+    const deletedFoodOrder = await FoodOrderModel.findByIdAndDelete(
+      foodOrderId
+    );
     res.send("Deleted this item: " + deletedFoodOrder);
   }
 );
