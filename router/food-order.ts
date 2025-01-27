@@ -14,12 +14,12 @@ FoodOrderRouter.get("/:id", async (req: Request, res: Response) => {
   res.send(item);
 });
 
-FoodOrderRouter.post("/", async (req: Request, res: Response) => {
-  const user = req?.userId;
-  const { foodOrderItems, totalPrice } = req.body;
-  const newOrder = await FoodOrderModel.create(order);
-  res.json(newOrder);
-});
+// FoodOrderRouter.post("/", async (req: Request, res: Response) => {
+//   const user = req?.userId;
+//   const { foodOrderItems, totalPrice } = req.body;
+//   const newOrder = await FoodOrderModel.create(order);
+//   res.json(newOrder);
+// });
 
 FoodOrderRouter.put("/:id", async (req: Request, res: Response) => {
   const { params, body } = req;
